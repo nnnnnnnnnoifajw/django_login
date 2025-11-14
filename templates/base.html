@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mini Notes</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'app.css' %}">
+  </head>
+  <body>
+    <header>
+      <h1><a href="/notes/">Mini Notes</a></h1>
+      <div>
+        {% if user.is_authenticated %}
+          {{ user.email }} | <a href="/accounts/logout/">ログアウト</a>
+        {% else %}
+          <a href="/accounts/login/">ログイン</a> | <a href="/accounts/signup/">サインアップ</a>
+        {% endif %}
+      </div>
+    </header>
+    <main class="container">
+      {% if messages %}{% for m in messages %}<p>{{ m }}</p>{% endfor %}<hr>{% endif %}
+      {% block content %}{% endblock %}
+    </main>
+  </body>
+</html>

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>メモ一覧</h2>
+<p><a class="btn" href="{% url 'note_new' %}">＋ 新しいメモ</a></p>
+<ul>
+  {% for n in notes %}
+  <li>
+    <strong>{{ n.title }}</strong>（{{ n.created_at|date:"Y-m-d H:i" }}）<br>
+    {{ n.content|linebreaksbr }}
+    {% if can_delete %}
+    <a class="btn btn-danger" href="{% url 'note_delete' n.id %}" onclick="return confirm('削除しますか？');">削除</a>
+    {% endif %}
+  </li>
+  {% empty %}
+  <li>まだメモがありません。</li>
+  {% endfor %}
+</ul>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+  <h2>新規登録</h2>
+  <p>メールアドレスに確認用リンクを送ります。リンクをクリックして登録を完了してください。</p>
+  <hr>
+
+  <form method="post" action="{% url 'account_signup' %}">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    {{ form.as_p }}
+    <p><button type="submit" class="btn">登録</button></p>
+  </form>
+
+  <p>すでにアカウントをお持ちですか？
+    <a href="{% url 'account_login' %}">ログインはこちら</a>
+  </p>
+{% endblock %}
